@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PackSmart — Wholesale Prepack for Shopify</title>
+  <meta name="description" content="PackSmart makes wholesale prepack ordering as easy as FashionGo or Faire — directly on your Shopify store." />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-50: #EAF3DE;
+      --green-100: #C0DD97;
+      --green-200: #97C459;
+      --green-400: #639922;
+      --green-600: #3B6D11;
+      --green-800: #27500A;
+      --green-900: #173404;
+      --gray-50: #F8F8F6;
+      --gray-100: #F1EFE8;
+      --gray-200: #D3D1C7;
+      --gray-400: #888780;
+      --gray-600: #5F5E5A;
+      --gray-900: #1C1C1A;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green-600);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .nav-logo-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .nav-logo-text span {
+      color: var(--green-600);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-600);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green-600); }
+
+    .btn-nav {
+      background: var(--green-600);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .btn-nav:hover { background: var(--green-800) !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, var(--green-50) 0%, var(--white) 60%);
+      padding: 100px 2rem 80px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-50);
+      border: 1px solid var(--green-100);
+      color: var(--green-600);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green-400);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.15;
+      color: var(--gray-900);
+      max-width: 720px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--green-600);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--gray-600);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-600);
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover { background: var(--green-800); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--gray-900);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      border: 1.5px solid var(--gray-200);
+      transition: border-color 0.2s, transform 0.1s;
+    }
+
+    .btn-secondary:hover { border-color: var(--green-400); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--green-600);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    /* FEATURES */
+    section {
+      padding: 80px 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-600);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--green-200);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green-50);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--green-600);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* PRICING */
+    .pricing-section {
+      background: var(--gray-50);
+      padding: 80px 2rem;
+    }
+
+    .pricing-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--green-400);
+      position: relative;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-600);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .plan-price {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.3rem;
+    }
+
+    .plan-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+
+    .plan-desc {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--gray-600);
+      padding: 5px 0;
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      color: var(--green-600);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-plan-outline {
+      border: 1.5px solid var(--gray-200);
+      color: var(--gray-900);
+    }
+
+    .btn-plan-outline:hover { border-color: var(--green-400); }
+
+    .btn-plan-filled {
+      background: var(--green-600);
+      color: white;
+    }
+
+    .btn-plan-filled:hover { background: var(--green-800); }
+
+    /* COMPATIBLE THEMES */
+    .themes-section {
+      text-align: center;
+      padding: 60px 2rem;
+      background: white;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .themes-label {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 1.5rem;
+    }
+
+    .themes-list {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .theme-pill {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      color: var(--gray-600);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* HOW IT WORKS */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      background: var(--green-600);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+      margin: 0 auto 1.2rem;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--green-600);
+      padding: 80px 2rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--green-600);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.2s;
+    }
+
+    .btn-cta:hover { transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--gray-900);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span { color: var(--green-200); }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 1rem 50px; }
+      .hero-stats { gap: 2rem; }
+      section { padding: 50px 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+    </div>
+    <span class="nav-logo-text">Pack<span>Smart</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="mailto:support@sjsmartapp.com">Contact</a></li>
+    <li><a href="https://apps.shopify.com" class="btn-nav">Install Free →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Shopify App for Wholesale Sellers</div>
+  <h1>Prepack ordering,<br /><em>just like FashionGo</em> — on your store</h1>
+  <p>PackSmart lets your wholesale buyers order by color and size pack — all in one click. No more per-variant ordering. Built for fashion wholesale.</p>
+  <div class="hero-cta">
+    <a href="https://apps.shopify.com" class="btn-primary">
+      Install on Shopify →
+    </a>
+    <a href="#features" class="btn-secondary">See features</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">14</div>
+      <div class="stat-label">Day free trial</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Themes supported</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Setup cost</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything your wholesale store needs</h2>
+  <p class="section-desc">PackSmart brings the prepack ordering experience of FashionGo and Faire directly to your Shopify store.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3>Prepack Table</h3>
+      <p>Color-by-size order table on every product page. Buyers set pack quantities per color and add everything to cart in one click.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      </div>
+      <h3>Cart Drawer</h3>
+      <p>Custom slide-out cart that shows prepack bundles clearly — color, size breakdown, pack count, and subtotal all at a glance.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Minimum Order Amount</h3>
+      <p>Set a minimum order value. Checkout is blocked until the requirement is met — shown clearly to buyers in the cart.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>Login to See Prices</h3>
+      <p>Hide wholesale prices from non-logged-in visitors. Only approved buyers who sign in can see product pricing.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3>Invoice & Packing List</h3>
+      <p>Print professional invoices and packing lists directly from Shopify order pages. Prepack bundles grouped with SKU breakdown.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Bulk Prepack Templates</h3>
+      <p>Create prepack templates (e.g. S:M:L:XL = 1:2:2:1) and apply them to dozens of products at once. Save hours of setup time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" style="background: var(--gray-50); max-width: 100%; padding: 80px 2rem;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <p class="section-desc">No coding required. Install PackSmart, configure your prepack settings, and your store is ready for wholesale buyers.</p>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Install PackSmart</h3>
+        <p>Add PackSmart to your Shopify store from the app store. One click, no code.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Set prepack ratios</h3>
+        <p>Choose your size ratios (e.g. S:M:L:XL = 1:2:2:1) per product or use bulk templates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Configure settings</h3>
+        <p>Set your minimum order amount, enable login-to-see-prices, and customize as needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Start selling</h3>
+        <p>Buyers order packs by color with one Add to Cart. Print invoices from any order page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPATIBLE THEMES -->
+<div class="themes-section">
+  <p class="themes-label">Compatible with popular Shopify themes</p>
+  <div class="themes-list">
+    <span class="theme-pill">Dawn</span>
+    <span class="theme-pill">Horizon</span>
+    <span class="theme-pill">Craft</span>
+    <span class="theme-pill">Sense</span>
+    <span class="theme-pill">Refresh</span>
+    <span class="theme-pill">Debut</span>
+    <span class="theme-pill">Spotlight</span>
+    <span class="theme-pill">Ritual</span>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-desc" style="margin: 0 auto;">Start free for 14 days. No credit card required.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$29<span>/month</span></div>
+        <p class="plan-desc">Perfect for growing wholesale stores.</p>
+        <ul class="plan-features">
+          <li>Up to 50 products</li>
+          <li>Prepack Table</li>
+          <li>Cart Drawer</li>
+          <li>Minimum Order Amount</li>
+          <li>Login to See Prices</li>
+          <li>Invoice & Packing List</li>
+          <li>Email support</li>
+        </ul>
+        <a href="https://apps.shopify.com" class="btn-plan btn-plan-outline">Start free trial</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$49<span>/month</span></div>
+        <p class="plan-desc">For established wholesale businesses.</p>
+        <ul class="plan-features">
+          <li>Unlimited products</li>
+          <li>Everything in Starter</li>
+          <li>Bulk Prepack Templates</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://apps.shopify.com" class="btn-plan btn-plan-filled">Start free trial</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to simplify your wholesale ordering?</h2>
+  <p>Join wholesale sellers who use PackSmart to sell smarter on Shopify.</p>
+  <a href="https://apps.shopify.com" class="btn-cta">Install PackSmart Free →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pack<span>Smart</span> by SJsmartapp</div>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="mailto:support@sjsmartapp.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2026 SJsmartapp. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
